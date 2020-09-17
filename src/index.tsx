@@ -1,11 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
+import store from "./store/create-store";
+import {BrowserRouter} from 'react-router-dom'
+import {Provider} from "react-redux"
+import {ProjectApiProvider} from './utils/context'
+import ProjectApi from "./services/project-api";
+
+
+const projectApi = new ProjectApi();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <BrowserRouter>
+        <Provider store={store}>
+            <ProjectApiProvider value={projectApi}>
+            <App />
+            </ProjectApiProvider>
+        </Provider>
+    </BrowserRouter>
+    ,document.getElementById('root')
 );
